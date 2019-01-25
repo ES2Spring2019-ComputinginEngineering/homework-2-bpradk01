@@ -3,8 +3,8 @@
 
 # FILL THESE COMMENTS IN
 #*****************************************
-# YOUR NAME:
-# NUMBER OF HOURS TO COMPLETE:  (please track how long this homework takes you to complete).
+# YOUR NAME: Ben Pradko
+# NUMBER OF HOURS TO COMPLETE: 1.5 Hrs (please track how long this homework takes you to complete).
 # YOUR COLLABORATION STATEMENT(s) (refer to syllabus):
 #
 #*****************************************
@@ -14,59 +14,78 @@
 #of the form y = (m * x) + b that mark the three sides of the triangle.
 
 #In order to accomplish this you will need functions which determine
-#where two lines intersect (x and y), a function which determines the distance between 
+#where two lines intersect (x and y), a function which determines the distance between
 #two points represented by (x,y) coordinates, and a function which determines
-#the area of a triangle using three side lengths(using Heron's Formula). 
+#the area of a triangle using three side lengths(using Heron's Formula).
 
-#Please complete the four required functions below:  
+#Please complete the four required functions below:
 
-import math #This line allows you to use math functions. Importantly, math.sqrt(#) which will produce the square root of the number inside the parentheses.
+import math  #This line allows you to use math functions. Importantly, math.sqrt(#) which will produce the square root of the number inside the parentheses.
 
 
 def intersectionoftwolines_x(m1, b1, m2, b2):
     # Calculate x for the point where two equations:
     # y = (m1 * x) + b1 and y = (m2 * x) + b2 intersect.
-    
-    
-    x = 0 #replace this with your calculation for x
+    #b1-b2=(m2*x)-(m1*x)
+    #b1-b2=x(m2-m1)
+    x = ((b1-b2)/(m2-m1))
     return x
 
 def intersectionoftwolines_y(m1, b1, m2, b2):
     # Calculate y for the point where two equations:
     # y = (m1 * x) + b1 and y = (m2 * x) + b2 intersect.
-    
-    
-    y = 0 #replace this with your calculation for y
+    #x=((y-b)/m)
+    #((y-b1)/m1)=((y-b2)/m2)
+    #m2(y-b1)=m1(y-b2)
+    #m2*y-m2*b1=m1*y-m1*b2
+    #m2*y-m1*y=m2*b1-m1*b2
+    #y(m2-m1)=(m2*b1-m1*b2)
+    #y=(m2*b1-m1*b2)/(m2-m1)
+    y = ((m2*b1-m1*b2)/(m2-m1))
     return y
-
 
 def distancebetweenpoints(x1, y1, x2, y2):
     # Calculate the linear distance between two points
     # (x1, y1) and (x2, y2).
-    
-    
-    distance = 0 # replace with your calculation for distance
+    #distance equation is sqrt of (x2-x1)**2+(y2-y1)**2
+
+    distance = math.sqrt((x2-x1)**2+(y2-y1)**2)
     return distance
-    
+
 def heronsformula(a, b, c):
     # Calculate the area of a triangle with three known side lengths.
     # You may want to look up Heron's formula online.
-    
-    
-    
-    area = 0 #replace this with your calculation for area
+    #herons formula sqrt (s(s-a)(s-b)(s-c))
+    #s=(a+b+c)/2
+
+    s = ((a+b+c)/2)
+    area = math.sqrt((s*(s-a)*(s-b)*(s-c)))
     return area
-    
+
 def areaofatriangle(m1, b1, m2, b2, m3, b3):
-    #Using the three functions above, now calculate the area of a 
+    #Using the three functions above, now calculate the area of a
     #triangle when the three sides are described by three linear equations
     #y = (m1 * x) + b1;  y = (m2 * x) + b2; and y = (m3 * x) + b3
-    
-    
-    area = 0 #replace this with your calculation for area
+
+    #x intersection points
+    x1 = ((b1-b2)/(m2-m1))
+    x2 = ((b2-b3)/(m3-m2))
+    x3 = ((b3-b1)/(m1-m3))
+    #y intsection points
+    y1 = ((m2*b1-m1*b2)/(m2-m1))
+    y2 = ((m3*b2-m2*b3)/(m3-m2))
+    y3 = ((m1*b3-m3*b1)/(m1-m3))
+    #side lengths
+    s1 = math.sqrt((x2-x1)**2+(y2-y1)**2)
+    s2 = math.sqrt((x3-x2)**2+(y3-y2)**2)
+    s3 = math.sqrt((x1-x3)**2+(y1-y3)**2)
+    #Heron's Equation, s value
+    s = (((s1)+(s2)+(s3))/2)
+
+    area = math.sqrt((s*(s-(s1))*(s-(s2))*(s-(s3))))
     return area
-    
-    
+
+
 #TEST CASES
 #These print statements will be true when your functions are working.
 
